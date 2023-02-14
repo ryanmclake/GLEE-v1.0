@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+data/glcp_countries
+data/organized_data_to_append
+.DS_Store
