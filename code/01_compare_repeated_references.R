@@ -12,6 +12,8 @@ library(tidyverse)
 library(sp)
 library(rworldmap)
 library(arrow)
+library(nimble)
+library(coda)
 
 d <- vroom::vroom("./data/organized_data_to_append/global_lake_res_CH4_emission_DB_all.csv")
 
@@ -181,7 +183,8 @@ compare_R_and_P_diff <- link5 %>% select(ch4_diff, data_source, ch4_diff.1, data
   xlab("Prairie et al 2020 - Diffusion")+
   labs(title = "Rosentreter vs.Prairie - Diffusion")
 
-# NO MAKJOR REPEATS IN THE LINK FROM Prairie to Kuhn
+
+
 
 
 

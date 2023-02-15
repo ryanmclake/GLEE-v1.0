@@ -20,12 +20,14 @@ ebu_function_output <- data.frame(x = -10:40,            # Create data for ggplo
 
 
 w <- read.table("./data/organized_data_to_append/global_lake_res_DB_refs_WWF_GLCP.txt", header = TRUE, row.names = NULL) %>%
-  select(mean_diff, mean_ebu, ebu_sd, diff_sd, glcp_mean_annual_temp, mean_obs_wtemp_k, lat) %>%
-  mutate(temp_for_model = ifelse(is.na(glcp_mean_annual_temp),mean_obs_wtemp_k, glcp_mean_annual_temp))
+  select(mean_diff, mean_ebu, ebu_sd, diff_sd, mean_annual_temp_k, mean_obs_wtemp_k, lat, country, biome_type) %>%
+  mutate(temp_for_model = ifelse(is.na(mean_annual_temp_k),mean_obs_wtemp_k, mean_annual_temp_k)) 
 
 
-ebu <- w %>% select(mean_ebu, ebu_sd, temp_for_model, lat) %>% na.omit(.) %>% filter(mean_ebu > 0) %>%
-  mutate(temp_for_model = temp_for_model - 273.15)
+ebu <- w %>% select(country, biome_type, mean_ebu, ebu_sd, temp_for_model, lat) %>% na.omit(.) %>% filter(mean_ebu >= 0) %>%
+  mutate(temp_for_model = temp_for_model - 273.15)%>%
+  mutate(temp_for_model = ifelse(temp_for_model < -100, NA, temp_for_model)) %>%
+  na.omit(.)
 
 ggplot(ebu) +
   geom_point(aes(temp_for_model, mean_ebu)) +
