@@ -3,9 +3,9 @@ model {
    
    #priors===================================================
    
-   Ea ~ dnorm(0,10000)
-   A ~ dlnorm(0,10000)
-   sd.pro ~ dunif(0, 10000)
+   A ~ dnorm(0,100)
+   a ~ dnorm(0,100)
+   sd.pro ~ dunif(0, 500)
    
    #end priors===============================================
    
@@ -14,7 +14,7 @@ model {
       #process model=============================================
      
       tau.pro[i] <- 1/((sd.pro)*(sd.pro))
-      predX[i] <- (Ea/8.314)*(1/(temp[i]+A))
+      predX[i] <- A * exp(a * temp[i])
       X[i] ~ dnorm(predX[i],tau.pro[i])
      
       #end of process model======================================
