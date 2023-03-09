@@ -115,3 +115,6 @@ diff_base_area <- base %>% select(ch4_diff, waterbody_id, month, surf_area_k) %>
 area_monthly_model <- lm(ch4_diff_scaled ~ surf_area_k_scaled, data = diff_base_area)
 summary(area_monthly_model)
 
+
+
+
