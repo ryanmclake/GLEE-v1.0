@@ -1,8 +1,5 @@
 
-if (!"pacman" %in% installed.packages()) install.packages("pacman")
-pacman::p_load(tidyverse, MCMCvis, lubridate, tidybayes,
-               ncdf4, reshape2, zoo, patchwork, hydroGOF, viridis,
-               imputeTS, devtools, scales, forecast, coda, rjags, R2jags,gridExtra)
+
 
 w <- f %>%
   select(ch4_diff, ch4_ebu, mean_annual_temp_k, mean_obs_wtemp_k, elevation, lat, waterbody_type, country, biome_type, hybas_id) %>%
@@ -56,9 +53,9 @@ model {
    
    #priors===================================================
    
-   Ea ~ dnorm(0,10000)
-   A ~ dlnorm(0,10000)
-   sd.pro ~ dunif(0, 10000)
+   EA ~ dunif(0,1000)
+   theta ~ dunif(0,100)
+   sd.pro ~ dunif(0, 1000)
    
    #end priors===============================================
    
